@@ -53,3 +53,79 @@ fn function_types() {
 fn return_number(x: i32) -> i32 {
     x + 1
 }
+
+/// Standard if, else if, else in rust
+/// Also showcasing branched variables
+fn branching() {
+    let x = 5;
+    if x == 5 {
+        println!("x is five!");
+    } else if x == 6 {
+        println!("x is six!");
+    } else {
+        println!("x is not five or six :(");
+    }
+    let y = if x == 5 { 10 } else { 15 }; // y: i32
+}
+
+/// Infinite loop until breakage in rust
+fn infinite() {
+    loop {
+        println("Print this infinite times!");
+    }
+}
+
+/// While loop correct when unsure how many times a loop is needed
+fn whileLoop() {
+    let mut x = 5; // mut x: i32
+    let mut done = false; // mut done: bool
+
+    while !done {
+        x += x - 3;
+
+        println!("{}", x);
+
+        if x % 5 == 0 {
+            done = true;
+        }
+    }
+}
+
+/// For loop for particular number of times. Expression based. Expression merely need to be able to
+/// use IntoIterator
+fn forLoop() {
+    for x in 0..10 {
+        println!("{}", x); // x: i32
+    }
+}
+
+
+/// Enumeration for when you need to keep track of how many times you've already enumerated
+fn enumeration() {
+    for (i,j) in (5..10).enumerate() {
+        println!("i = {} and j = {}", i, j);
+    }
+}
+
+/// Breaking and continuing in loops.
+/// Rust allows the regular break to get out of loops. It does however also have continue
+/// when you merely want to move onwards to next iteration
+fn breakingAndContinuing() {
+    for x in 0..10 {
+        if x % 2 == 0 { continue; }
+
+        println!("{}", x);
+    }
+}
+
+/// Additionally, rust allows labeling of loops such that on can easily break out to,
+/// or continue at a specific loop in cases of several nested loops
+fn nestedLoopBreakingAndContinuing() {
+    'outer: for x in 0..10 {
+        'inner: for y in 0..10 {
+            if x % 2 == 0 { continue 'outer; } // continues the loop over x
+            if y % 2 == 0 { continue 'inner; } // continues the loop over y
+            println!("x: {}, y: {}", x, y);
+        }
+    }
+}

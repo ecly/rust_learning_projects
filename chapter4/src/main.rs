@@ -71,12 +71,12 @@ fn branching() {
 /// Infinite loop until breakage in rust
 fn infinite() {
     loop {
-        println("Print this infinite times!");
+        println!("Print this infinite times!");
     }
 }
 
 /// While loop correct when unsure how many times a loop is needed
-fn whileLoop() {
+fn while_loop() {
     let mut x = 5; // mut x: i32
     let mut done = false; // mut done: bool
 
@@ -93,7 +93,7 @@ fn whileLoop() {
 
 /// For loop for particular number of times. Expression based. Expression merely need to be able to
 /// use IntoIterator
-fn forLoop() {
+fn for_loop() {
     for x in 0..10 {
         println!("{}", x); // x: i32
     }
@@ -110,7 +110,7 @@ fn enumeration() {
 /// Breaking and continuing in loops.
 /// Rust allows the regular break to get out of loops. It does however also have continue
 /// when you merely want to move onwards to next iteration
-fn breakingAndContinuing() {
+fn breaking_and_continuing() {
     for x in 0..10 {
         if x % 2 == 0 { continue; }
 
@@ -120,12 +120,60 @@ fn breakingAndContinuing() {
 
 /// Additionally, rust allows labeling of loops such that on can easily break out to,
 /// or continue at a specific loop in cases of several nested loops
-fn nestedLoopBreakingAndContinuing() {
+fn nested_loop_breaking_and_continuing() {
     'outer: for x in 0..10 {
         'inner: for y in 0..10 {
             if x % 2 == 0 { continue 'outer; } // continues the loop over x
             if y % 2 == 0 { continue 'inner; } // continues the loop over y
             println!("x: {}, y: {}", x, y);
         }
+    }
+}
+
+/// Vectors can be initialized with repeating values or with complete declarations
+fn vector_initialization() {
+    let v = vec![1, 2, 3, 4, 5]; // v: Vec<i32>
+    let v = vec![0; 10]; // ten zeroes
+}
+
+/// Per usual, vector indexing starts at 0
+/// Rather unusually, refering an index takes a type usize instead of int
+/// let i: usize = 0;
+/// let j: i32 = 0;
+/// Inferring an index with i will work, inferring it with j will not
+fn vector_access() { 
+    let v = vec![1, 2, 3, 4, 5];
+
+    println!("The third element of v is {}", v[2]);
+}
+
+/// If we want to access an array with unsafe indices, we can use get
+/// to catch the panic that will otherwise be called
+fn out_of_bounds_access() {
+    let v = vec![1, 2, 3];
+    match v.get(7) {
+        Some(x) => println!("Item 7 is {}", x),
+        None => println!("Sorry, this vector is too short.")
+    }
+}
+
+/// Vector iteration can be done multiple ways, yielding multiple results
+/// The version taking ownership of the array yields it unusable and thereby uncompilable if this
+/// is attempted.
+/// Instead the references version should be used if it is to remain usable.
+/// If changes are to be made throughout iteration the mutable version should be used.
+fn vector_iteration() {
+    let mut v = vec![1, 2, 3, 4, 5];
+
+    for i in &v {
+        println!("A reference to {}", i);
+    }
+
+    for i in &mut v {
+        println!("A mutable reference to {}", i);
+    }
+
+    for i in v {
+        println!("Take ownership of the vector and its element {}", i);
     }
 }

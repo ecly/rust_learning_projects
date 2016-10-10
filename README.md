@@ -1,2 +1,2 @@
 # rust_learning_projects
-My playground for learning rust
+My notes and examples from learning rust through docs
